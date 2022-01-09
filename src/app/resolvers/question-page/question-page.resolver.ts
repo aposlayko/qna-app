@@ -23,7 +23,6 @@ export class QuestionPageResolver implements Resolve<Question> {
     return this.questionsService.getQuestionById(questionId).pipe(
       take(1),
       mergeMap(question => {
-        console.log(question);
         if (question) {
           return of(question);
         } else { // question not found

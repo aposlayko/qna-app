@@ -7,13 +7,13 @@ import {QuestionPageResolver} from './resolvers/question-page/question-page.reso
 const routes: Routes = [{
   path: '',
   component: QuestionListComponent,
-  children: [{
-    path: 'question/:id',
-    component: QuestionPageComponent,
-    resolve: {
-      question: QuestionPageResolver
-    }
-  }]
+  children: []
+}, {
+  path: 'question/:id',
+  component: QuestionPageComponent,
+  resolve: {
+    question: QuestionPageResolver
+  }
 }];
 
 @NgModule({

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {Question} from '../../interfaces/question';
 
 @Component({
   selector: 'app-question-page',
@@ -7,13 +8,12 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./question-page.component.scss']
 })
 export class QuestionPageComponent implements OnInit {
+  question: Question;
 
-  constructor(private activatedRoute: ActivatedRoute) {
-    console.log('QuestionPageComponent');
-  }
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    console.log(this.activatedRoute);
+    this.question = this.activatedRoute.snapshot.data['question'];
   }
 
 }
