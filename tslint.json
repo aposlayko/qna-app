@@ -1,0 +1,6 @@
+{
+  "rules": {
+    "no-non-null-assertion": true,
+    "no-shadowed-variable": true
+  }
+}

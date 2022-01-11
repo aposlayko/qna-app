@@ -1,3 +1,7 @@
 <a routerLink="/">Back</a>
 <h3>{{question.title}}</h3>
 <p>{{question.answer}}</p>
+<div>
+  <textarea #textAreaElement></textarea>
+</div>
+<div [innerHTML]="textWithMarkdown"></div>
