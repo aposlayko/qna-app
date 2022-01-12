@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, delay, filter, map, Observable, of} from 'rxjs';
 import {Question} from '../interfaces/question';
+import {questions} from './questions.mock';
 
 @Injectable({
   providedIn: 'root'
@@ -12,17 +13,7 @@ export class QuestionsService {
   constructor() { }
 
   fetchQuestions(): void {
-    of([{
-      id: 1,
-      title: 'Whats up?',
-      answer: 'It\'s OK',
-      categoryId: 1
-    }, {
-      id: 2,
-      title: 'What\'s your name?',
-      answer: 'John Smith',
-      categoryId: 1
-    }]).pipe(delay(1000)).subscribe(data => this._questions$.next(data));
+    of(questions).pipe(delay(1000)).subscribe(data => this._questions$.next(data));
   }
 
   getQuestionsAsync(): Observable<Question[]> {

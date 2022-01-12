@@ -1,0 +1,125 @@
+.result-html {
+  padding: 2px 10px;
+
+  p {
+    margin: 0 0 10px;
+  }
+
+  hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #eee;
+  }
+
+  ul, ol {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+
+  ul ul, ol ul, ul ol, ol ol {
+    margin-bottom: 0;
+  }
+
+  a {
+    color: #428bca;
+    text-decoration: none;
+  }
+
+  h1, h2, h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+  }
+
+  h1 {font-size: 36px;}
+  h2 {font-size: 30px;}
+  h3 {font-size: 24px;}
+  h4 {font-size: 18px;}
+  h5 {font-size: 14px;}
+  h6 {font-size: 12px;}
+
+  blockquote {
+    padding: 10px 20px;
+    margin: 0 0 20px;
+    font-size: 17.5px;
+    border-left: 5px solid #eee;
+  }
+
+  code {
+    padding: 2px 4px;
+    font-size: 90%;
+    color: #c7254e;
+    background-color: #f9f2f4;
+    border-radius: 4px;
+  }
+
+  pre {
+    display: block;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    color: #333;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    code {
+      padding: 0;
+      font-size: inherit;
+      color: inherit;
+      white-space: pre-wrap;
+      background-color: transparent;
+      border-radius: 0;
+    }
+  }
+
+  code, kbd, pre, samp {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  }
+
+  table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+
+    border-spacing: 0;
+    border-collapse: collapse;
+    text-align: left;
+
+    thead > tr > th {
+      padding: 8px;
+      line-height: 1.42857143;
+      vertical-align: bottom;
+      border-bottom: 2px solid #ddd;
+    }
+
+    thead:first-child > tr:first-child > th {
+      border-top: 0;
+    }
+
+    tbody {
+      tr {
+        td {
+          padding: 8px;
+          line-height: 1.42857143;
+          vertical-align: top;
+          border-top: 1px solid #ddd;
+        }
+      }
+      tr:nth-child(odd) > td, tr:nth-child(odd) > th {
+        background-color: #f9f9f9;
+      }
+    }
+  }
+}
+
