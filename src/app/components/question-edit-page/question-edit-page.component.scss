@@ -1,0 +1,23 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: white;
+
+  .menu {
+    height: 5%;
+  }
+
+  .edit-container {
+    display: flex;
+    height: 95%;
+
+    &>* {
+      width: 50%
+    }
+
+    .markdown {
+      overflow: auto;
+    }
+  }
+}
