@@ -1,7 +1,6 @@
-<div><a routerLink="/">Back</a></div>
-<div><a routerLink="edit/">Edit</a></div>
-<h3>{{question.title}}</h3>
+<mat-nav-list class="menu">
+  <a mat-list-item routerLink="/">Back</a>
+  <a mat-list-item routerLink="edit/">Edit</a>
+</mat-nav-list>
+<h1>{{question.title}}</h1>
 <app-markup-container [rawText]="question.answer"></app-markup-container>
-<div>
-  <textarea #textAreaElement></textarea>
-</div>

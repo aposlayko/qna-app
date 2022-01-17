@@ -15,4 +15,8 @@ export class QuestionEditPageComponent implements OnInit {
   ngOnInit(): void {
     this.question = this.activatedRoute.snapshot.data['question'];
   }
+
+  handleUpdateQuestion(question: Question) {
+    console.log(question);
+  }
 }

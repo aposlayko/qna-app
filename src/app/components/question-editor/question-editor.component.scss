@@ -1,0 +1,11 @@
+:host {
+  display: flex;
+
+  &>* {
+    width: 50%
+  }
+
+  .markdown {
+    overflow: auto;
+  }
+}

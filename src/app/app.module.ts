@@ -12,6 +12,8 @@ import { QuestionEditPageComponent } from './components/question-edit-page/quest
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { QuestionEditorComponent } from './components/question-editor/question-editor.component';
+import { QuestionNewPageComponent } from './components/question-new-page/question-new-page.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import {MatInputModule} from '@angular/material/input';
     QuestionListComponent,
     QuestionPageComponent,
     MarkupContainerComponent,
-    QuestionEditPageComponent
+    QuestionEditPageComponent,
+    QuestionEditorComponent,
+    QuestionNewPageComponent
   ],
   imports: [
     BrowserModule,

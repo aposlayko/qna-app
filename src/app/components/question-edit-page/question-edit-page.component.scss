@@ -9,15 +9,8 @@
   }
 
   .edit-container {
-    display: flex;
     height: 95%;
 
-    &>* {
-      width: 50%
-    }
 
-    .markdown {
-      overflow: auto;
-    }
   }
 }

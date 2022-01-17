@@ -4,6 +4,7 @@ import {QuestionListComponent} from './components/question-list/question-list.co
 import {QuestionPageComponent} from './components/question-page/question-page.component';
 import {QuestionPageResolver} from './resolvers/question-page/question-page.resolver';
 import {QuestionEditPageComponent} from './components/question-edit-page/question-edit-page.component';
+import {QuestionNewPageComponent} from './components/question-new-page/question-new-page.component';
 
 const routes: Routes = [{
   path: '',
@@ -20,6 +21,9 @@ const routes: Routes = [{
   resolve: {
     question: QuestionPageResolver
   }
+}, {
+  path: 'new-question',
+  component: QuestionNewPageComponent
 }];
 
 @NgModule({
