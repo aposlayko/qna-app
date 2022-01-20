@@ -7,7 +7,6 @@ import {QuestionsService} from './services/questions.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private questionService: QuestionsService) {
-    this.questionService.fetchQuestions();
+  constructor() {
   }
 }

@@ -1,7 +1,7 @@
 import {Question} from '../interfaces/question';
 
 export const emptyQuestion: Question = {
-  id: -1,
+  id: '',
   title: '',
   answer: '',
   categoryId: -1

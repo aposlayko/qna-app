@@ -15,6 +15,10 @@ import {MatInputModule} from '@angular/material/input';
 import { QuestionEditorComponent } from './components/question-editor/question-editor.component';
 import { QuestionNewPageComponent } from './components/question-new-page/question-new-page.component';
 
+import {AngularFireModule} from '@angular/fire/compat';
+import {environment} from '../environments/environment';
+import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +36,9 @@ import { QuestionNewPageComponent } from './components/question-new-page/questio
     MatListModule,
     MatGridListModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

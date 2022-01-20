@@ -1,29 +1,29 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, delay, filter, map, Observable, of} from 'rxjs';
+import {first, map, Observable} from 'rxjs';
 import {Question} from '../interfaces/question';
-import {questions} from './questions.mock';
+import {AngularFirestore} from '@angular/fire/compat/firestore';
+import {convertDocSnap, convertSnaps} from '../utils/db-utils';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuestionsService {
 
-  private _questions$ = new BehaviorSubject<Question[]>([]);
+  constructor(private db: AngularFirestore) {}
 
-  constructor() { }
-
-  fetchQuestions(): void {
-    of(questions).pipe(delay(1000)).subscribe(data => this._questions$.next(data));
+  getQuestions(): Observable<Question[]> {
+    return this.db.collection<Question>('questions').snapshotChanges()
+      .pipe(
+        map(convertSnaps),
+        first()
+      );
   }
 
-  getQuestionsAsync(): Observable<Question[]> {
-    return this._questions$.asObservable();
-  }
-
-  getQuestionById(id: number): Observable<Question> {
-    return this.getQuestionsAsync().pipe(
-      filter(questions => Boolean(questions&& !!questions.length)),
-      map(questions => questions.filter(q => q.id === id)[0])
-    );
+  getQuestionById(id: string): Observable<Question> {
+    return this.db.doc<Question>(`questions/${id}`).snapshotChanges()
+      .pipe(
+        map(convertDocSnap),
+        first()
+      );
   }
 }

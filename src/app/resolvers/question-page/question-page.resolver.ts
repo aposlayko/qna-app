@@ -18,7 +18,7 @@ export class QuestionPageResolver implements Resolve<Question> {
   ) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Question> {
-    const questionId = Number(route.paramMap.get('id'));
+    const questionId = route.paramMap.get('id') || '';
 
     return this.questionsService.getQuestionById(questionId).pipe(
       take(1),
