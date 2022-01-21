@@ -1,7 +1,6 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Question} from '../../interfaces/question';
 import {debounceTime, fromEvent, map} from 'rxjs';
-import {emptyQuestion} from '../../constants/empty-question.const';
 
 @Component({
   selector: 'app-question-editor',
@@ -15,7 +14,13 @@ export class QuestionEditorComponent implements OnInit, AfterViewInit {
 
   @Output() updateQuestion = new EventEmitter<Question>();
 
-  updatedQuestion: Question = emptyQuestion;
+  updatedQuestion: Question = {
+    id: '',
+    title: '',
+    answer: '',
+    categoryId: '-1',
+    tags: {}
+  };
 
   constructor() { }
 
@@ -33,10 +38,12 @@ export class QuestionEditorComponent implements OnInit, AfterViewInit {
         map((event: KeyboardEvent) => {
           return (<HTMLTextAreaElement>event.target).value;
         }),
-        debounceTime(400)
       ).subscribe(value => {
       this.updatedQuestion.answer = value;
-      this.updateQuestion.emit(this.updatedQuestion);
     });
+  }
+
+  saveQuestionHandler() {
+    this.updateQuestion.emit(this.updatedQuestion);
   }
 }

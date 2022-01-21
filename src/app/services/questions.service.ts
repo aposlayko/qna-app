@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {first, map, Observable} from 'rxjs';
-import {Question} from '../interfaces/question';
+import {first, from, map, Observable} from 'rxjs';
+import {NewQuestion, Question} from '../interfaces/question';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
 import {convertDocSnap, convertSnaps} from '../utils/db-utils';
 
@@ -25,5 +25,24 @@ export class QuestionsService {
         map(convertDocSnap),
         first()
       );
+  }
+
+  getQuestionsByTagNames(tags: string[]): Observable<Question[]> {
+    return this.db.collection<Question>(
+      'questions',
+      ref => {
+        let updRef;
+        tags.forEach(tag => updRef = ref.where(`tags.${tag}`, '==', true));
+        return updRef;
+      }
+    ).snapshotChanges()
+      .pipe(
+        map(convertSnaps),
+        first()
+      );
+  }
+
+  createQuestion(question: NewQuestion): Observable<any> {
+    return from(this.db.collection('questions').add(question))
   }
 }

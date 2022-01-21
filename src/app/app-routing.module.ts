@@ -5,6 +5,7 @@ import {QuestionPageComponent} from './components/question-page/question-page.co
 import {QuestionPageResolver} from './resolvers/question-page/question-page.resolver';
 import {QuestionEditPageComponent} from './components/question-edit-page/question-edit-page.component';
 import {QuestionNewPageComponent} from './components/question-new-page/question-new-page.component';
+import {NotFoundPageComponent} from './components/not-found-page/not-found-page.component';
 
 const routes: Routes = [{
   path: '',
@@ -24,6 +25,13 @@ const routes: Routes = [{
 }, {
   path: 'new-question',
   component: QuestionNewPageComponent
+}, {
+  path: '404',
+  component: NotFoundPageComponent
+},
+  {
+  path: '**',
+  redirectTo: '404'
 }];
 
 @NgModule({

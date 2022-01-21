@@ -18,6 +18,8 @@ import { QuestionNewPageComponent } from './components/question-new-page/questio
 import {AngularFireModule} from '@angular/fire/compat';
 import {environment} from '../environments/environment';
 import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
+import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
     MarkupContainerComponent,
     QuestionEditPageComponent,
     QuestionEditorComponent,
-    QuestionNewPageComponent
+    QuestionNewPageComponent,
+    NotFoundPageComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,7 @@ import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
     MatGridListModule,
     MatFormFieldModule,
     MatInputModule,
+    MatButtonModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
   ],

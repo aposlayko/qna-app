@@ -2,5 +2,10 @@ export interface Question {
   id: string;
   title: string;
   answer: string;
-  categoryId: number;
+  categoryId: string;
+  tags: {
+    [key: string]: boolean
+  }
 }
+
+export type NewQuestion = Omit<Question, 'id'>
