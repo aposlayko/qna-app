@@ -46,7 +46,11 @@ export class QuestionsService {
     return from(this.db.collection('questions').add(question))
   }
 
-  patchQuestion(id: string, question: Partial<NewQuestion>): Observable<any> {
+  patchQuestion(id: string, question: Partial<NewQuestion>): Observable<void> {
     return from(this.db.collection('questions').doc(id).update(question));
+  }
+
+  deleteQuestion(id: string): Observable<void> {
+    return from(this.db.collection('questions').doc(id).delete());
   }
 }

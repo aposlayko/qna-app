@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Question} from '../../interfaces/question';
+import {QuestionsService} from '../../services/questions.service';
 
 @Component({
   selector: 'app-question-page',
@@ -13,10 +14,18 @@ export class QuestionPageComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    private questionService: QuestionsService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.question = this.activatedRoute.snapshot.data['question'];
     this.tags = Object.keys(this.question.tags);
+  }
+
+  deleteQuestionHandler() {
+    this.questionService.deleteQuestion(this.question.id).subscribe(() => {
+      this.router.navigate(['/']);
+    })
   }
 }
