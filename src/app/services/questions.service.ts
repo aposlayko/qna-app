@@ -45,4 +45,8 @@ export class QuestionsService {
   createQuestion(question: NewQuestion): Observable<any> {
     return from(this.db.collection('questions').add(question))
   }
+
+  patchQuestion(id: string, question: Partial<NewQuestion>): Observable<any> {
+    return from(this.db.collection('questions').doc(id).update(question));
+  }
 }

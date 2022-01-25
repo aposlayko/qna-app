@@ -20,6 +20,9 @@ import {environment} from '../environments/environment';
 import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import {MatButtonModule} from '@angular/material/button';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatIconModule} from '@angular/material/icon';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -41,6 +44,9 @@ import {MatButtonModule} from '@angular/material/button';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatChipsModule,
+    MatIconModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
   ],

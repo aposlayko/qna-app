@@ -9,6 +9,7 @@ import {Question} from '../../interfaces/question';
 })
 export class QuestionPageComponent implements OnInit {
   question: Question;
+  tags: string[];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -16,5 +17,6 @@ export class QuestionPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.question = this.activatedRoute.snapshot.data['question'];
+    this.tags = Object.keys(this.question.tags);
   }
 }

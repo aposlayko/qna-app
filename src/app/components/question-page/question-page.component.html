@@ -3,4 +3,11 @@
   <a mat-list-item routerLink="edit/">Edit</a>
 </mat-nav-list>
 <h1>{{question.title}}</h1>
+<mat-chip-list>
+  <mat-chip
+    *ngFor="let tag of tags"
+    selected
+    color="primary"
+  >{{tag}}</mat-chip>
+</mat-chip-list>
 <app-markup-container [rawText]="question.answer"></app-markup-container>

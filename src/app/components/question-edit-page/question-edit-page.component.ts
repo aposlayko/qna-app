@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Question} from '../../interfaces/question';
+import {QuestionsService} from '../../services/questions.service';
 
 @Component({
   selector: 'app-question-edit-page',
@@ -10,13 +11,24 @@ import {Question} from '../../interfaces/question';
 export class QuestionEditPageComponent implements OnInit {
   question: Question;
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private questionService: QuestionsService
+  ) { }
 
   ngOnInit(): void {
     this.question = this.activatedRoute.snapshot.data['question'];
   }
 
   handleUpdateQuestion(question: Question) {
-    console.log(question);
+    const id = question.id;
+    delete question.id;
+    console.log(question, id);
+
+    this.questionService.patchQuestion(id, question).subscribe(() => {
+      this.router.navigate([`question/${this.activatedRoute.snapshot.params['id']}`]);
+
+    });
   }
 }

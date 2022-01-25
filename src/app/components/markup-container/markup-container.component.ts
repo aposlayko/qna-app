@@ -9,10 +9,12 @@ import hljs from 'highlight.js';
   styleUrls: ['./markup-container.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class MarkupContainerComponent implements OnInit {
+export class MarkupContainerComponent {
   @Input() set rawText(value: string) {
-    const textWithMarkdown = this.md.render(value);
-    this.html = this.sanitizer.bypassSecurityTrustHtml(textWithMarkdown);
+    if (value) {
+      const textWithMarkdown = this.md.render(value);
+      this.html = this.sanitizer.bypassSecurityTrustHtml(textWithMarkdown);
+    }
   }
 
   html: SafeHtml = '';
@@ -34,11 +36,4 @@ export class MarkupContainerComponent implements OnInit {
   });
 
   constructor(private sanitizer: DomSanitizer) { }
-
-  ngOnInit(): void {
-    /*if (this.rawText) {
-      const textWithMarkdown = this.md.render(this.rawText);
-      this.html = this.sanitizer.bypassSecurityTrustHtml(textWithMarkdown);
-    }*/
-  }
 }

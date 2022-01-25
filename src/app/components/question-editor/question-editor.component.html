@@ -1,8 +1,49 @@
-<div class="editor-container">
-  <textarea [value]="updatedQuestion.answer" #textArea></textarea>
-  <div class="markdown">
-    <app-markup-container [rawText]="updatedQuestion.answer"></app-markup-container>
-  </div>
-</div>
+<form [formGroup]="questionForm">
+  <mat-form-field  appearance="fill">
+    <mat-label>Title</mat-label>
+    <input formControlName="titleInput" matInput>
+  </mat-form-field>
 
-<button mat-raised-button color="primary" (click)="saveQuestionHandler()">Save</button>
+  <mat-form-field appearance="fill">
+    <mat-label>Selected tags</mat-label>
+    <mat-chip-list
+      #chipList
+      multiple
+      formControlName="tagsInput"
+      aria-label="Tags selection"
+      >
+      <mat-chip
+        *ngFor="let tag of tags"
+        [value]="tag"
+        (removed)="removeTag(tag)">
+        {{tag}}
+
+        <button matChipRemove>
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip>
+      <input placeholder="New tag..."
+             [matChipInputFor]="chipList"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             [matChipInputAddOnBlur]="addOnBlur"
+             (matChipInputTokenEnd)="addTag($event)">
+    </mat-chip-list>
+  </mat-form-field>
+
+  <div class="editor-container">
+    <mat-form-field  appearance="fill">
+      <mat-label>Textarea</mat-label>
+      <textarea matInput formControlName="answerInput" cdkTextareaAutosize [value]="updatedQuestion.answer" #textArea></textarea>
+    </mat-form-field>
+    <div class="markdown">
+      <app-markup-container [rawText]="(questionForm.controls['answerInput'].valueChanges | async) || updatedQuestion.answer"></app-markup-container>
+    </div>
+  </div>
+
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="!questionForm.valid"
+    (click)="saveQuestionHandler()"
+  >Save</button>
+</form>
