@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Question} from '../../interfaces/question.interface';
-import {QuestionsService} from '../../services/questions.service';
-import {Observable} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-question-list',
@@ -9,11 +8,11 @@ import {Observable} from 'rxjs';
   styleUrls: ['./question-list.component.scss']
 })
 export class QuestionListComponent implements OnInit {
-  public questions$: Observable<Question[]>;
+  public questions: Question[];
 
-  constructor(private questionService: QuestionsService) { }
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.questions$ = this.questionService.getQuestions();
+    this.questions = this.activatedRoute.snapshot.data['questions'];
   }
 }

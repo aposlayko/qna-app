@@ -22,6 +22,7 @@ export class QuestionNewPageComponent implements OnInit {
   updateQuestionHandler(question: Question) {
     console.log(question);
     delete question.id;
+    question.categoryId = this.activatedRoute.snapshot.params['category_id']
     this.questionService.createQuestion(question).subscribe(() => {
       this.router.navigate([`../`], {relativeTo: this.activatedRoute});
     });

@@ -10,7 +10,7 @@
 <h1>Question list</h1>
 
 <mat-list role="list">
-  <mat-list-item role="listitem" *ngFor="let question of (questions$ | async)">
+  <mat-list-item role="listitem" *ngFor="let question of questions">
     <a
       [routerLink]="'./question/' + question.id">
       {{ question.title }}
