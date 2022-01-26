@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Question} from '../../interfaces/question';
+import {Question} from '../../interfaces/question.interface';
 import {QuestionsService} from '../../services/questions.service';
 
 @Component({
@@ -25,7 +25,7 @@ export class QuestionPageComponent implements OnInit {
 
   deleteQuestionHandler() {
     this.questionService.deleteQuestion(this.question.id).subscribe(() => {
-      this.router.navigate(['/']);
+      this.router.navigate(['../../'], {relativeTo: this.activatedRoute});
     })
   }
 }

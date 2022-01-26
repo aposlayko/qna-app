@@ -1,6 +1,9 @@
 <mat-nav-list>
   <mat-list-item role="listitem">
-    <a [routerLink]="'/new-question/'">Create question</a>
+    <a [routerLink]="'../../'">Back</a>
+  </mat-list-item>
+  <mat-list-item role="listitem">
+    <a [routerLink]="'./new-question/'">Create question</a>
   </mat-list-item>
 </mat-nav-list>
 
@@ -9,7 +12,7 @@
 <mat-list role="list">
   <mat-list-item role="listitem" *ngFor="let question of (questions$ | async)">
     <a
-      [routerLink]="'/question/' + question.id">
+      [routerLink]="'./question/' + question.id">
       {{ question.title }}
     </a>
   </mat-list-item>

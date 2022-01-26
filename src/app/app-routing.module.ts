@@ -6,24 +6,32 @@ import {QuestionPageResolver} from './resolvers/question-page/question-page.reso
 import {QuestionEditPageComponent} from './components/question-edit-page/question-edit-page.component';
 import {QuestionNewPageComponent} from './components/question-new-page/question-new-page.component';
 import {NotFoundPageComponent} from './components/not-found-page/not-found-page.component';
+import {CategoryPageComponent} from './components/category-page/category-page.component';
+import {QuestionListResolver} from './resolvers/question-list/question-list.resolver';
 
 const routes: Routes = [{
   path: '',
-  component: QuestionListComponent,
+  component: CategoryPageComponent,
 }, {
-  path: 'question/:id',
+  path: 'category/:id',
+  component: QuestionListComponent,
+  resolve: {
+    questions: QuestionListResolver
+  }
+}, {
+  path: 'category/:category_id/question/:id',
   component: QuestionPageComponent,
   resolve: {
     question: QuestionPageResolver
   },
 }, {
-  path: 'question/:id/edit',
+  path: 'category/:category_id/question/:id/edit',
   component: QuestionEditPageComponent,
   resolve: {
     question: QuestionPageResolver
   }
 }, {
-  path: 'new-question',
+  path: 'category/:category_id/new-question',
   component: QuestionNewPageComponent
 }, {
   path: '404',

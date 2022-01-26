@@ -23,6 +23,9 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
 import {ReactiveFormsModule} from '@angular/forms';
+import { CategoryPageComponent } from './components/category-page/category-page.component';
+import { AddCategoryDialogComponent } from './components/add-category-dialog/add-category-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,9 @@ import {ReactiveFormsModule} from '@angular/forms';
     QuestionEditPageComponent,
     QuestionEditorComponent,
     QuestionNewPageComponent,
-    NotFoundPageComponent
+    NotFoundPageComponent,
+    CategoryPageComponent,
+    AddCategoryDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +51,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     MatButtonModule,
     MatChipsModule,
     MatIconModule,
+    MatDialogModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule

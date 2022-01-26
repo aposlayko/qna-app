@@ -5,26 +5,27 @@ import {
   ActivatedRouteSnapshot
 } from '@angular/router';
 import {EMPTY, mergeMap, Observable, of, take} from 'rxjs';
-import {QuestionsService} from '../../services/questions.service';
 import {Question} from '../../interfaces/question.interface';
+import {QuestionsService} from '../../services/questions.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class QuestionPageResolver implements Resolve<Question> {
+export class QuestionListResolver implements Resolve<Question[]> {
   constructor(
     private questionsService: QuestionsService,
     private router: Router
   ) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Question> {
-    const questionId = route.paramMap.get('id') || '';
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Question[]> {
+    const categoryId = route.paramMap.get('id') || '';
 
-    return this.questionsService.getQuestionById(questionId).pipe(
+    return this.questionsService.getQuestionByCategory(categoryId).pipe(
       take(1),
-      mergeMap(question => {
-        if (question) {
-          return of(question);
+      mergeMap(questions => {
+        if (questions) {
+          console.log(questions);
+          return of(questions);
         } else { // question not found
           this.router.navigate(['/']);
           return EMPTY;

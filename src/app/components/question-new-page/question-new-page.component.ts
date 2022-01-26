@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Question} from '../../interfaces/question';
+import {Question} from '../../interfaces/question.interface';
 import {QuestionsService} from '../../services/questions.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-question-new-page',
@@ -12,7 +12,8 @@ export class QuestionNewPageComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private questionService: QuestionsService
+    private questionService: QuestionsService,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -22,7 +23,7 @@ export class QuestionNewPageComponent implements OnInit {
     console.log(question);
     delete question.id;
     this.questionService.createQuestion(question).subscribe(() => {
-      this.router.navigate(['/']);
+      this.router.navigate([`../`], {relativeTo: this.activatedRoute});
     });
   }
 }

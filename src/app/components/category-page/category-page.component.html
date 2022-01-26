@@ -1,0 +1,16 @@
+<mat-nav-list>
+  <mat-list-item role="listitem">
+    <a (click)="createCategoryHandler()">Create category</a>
+  </mat-list-item>
+</mat-nav-list>
+
+<h1>Category list</h1>
+
+<mat-list role="list">
+  <mat-list-item role="listitem" *ngFor="let category of (categories$ | async)">
+    <a
+      [routerLink]="'/category/' + category.id">
+      {{ category.name }}
+    </a>
+  </mat-list-item>
+</mat-list>

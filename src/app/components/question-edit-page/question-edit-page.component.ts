@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Question} from '../../interfaces/question';
+import {Question} from '../../interfaces/question.interface';
 import {QuestionsService} from '../../services/questions.service';
 
 @Component({
@@ -24,11 +24,9 @@ export class QuestionEditPageComponent implements OnInit {
   handleUpdateQuestion(question: Question) {
     const id = question.id;
     delete question.id;
-    console.log(question, id);
 
     this.questionService.patchQuestion(id, question).subscribe(() => {
-      this.router.navigate([`question/${this.activatedRoute.snapshot.params['id']}`]);
-
+      this.router.navigate([`../`], {relativeTo: this.activatedRoute});
     });
   }
 }

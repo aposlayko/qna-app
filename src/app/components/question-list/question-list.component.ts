@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Question} from '../../interfaces/question';
+import {Question} from '../../interfaces/question.interface';
 import {QuestionsService} from '../../services/questions.service';
 import {Observable} from 'rxjs';
 
