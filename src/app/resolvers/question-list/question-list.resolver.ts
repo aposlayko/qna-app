@@ -18,7 +18,7 @@ export class QuestionListResolver implements Resolve<Question[]> {
   ) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Question[]> {
-    const categoryId = route.paramMap.get('id') || '';
+    const categoryId = route.paramMap.get('category_id') || '';
 
     return this.questionsService.getQuestionByCategory(categoryId).pipe(
       take(1),

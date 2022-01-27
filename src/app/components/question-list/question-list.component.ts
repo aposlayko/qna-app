@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Question} from '../../interfaces/question.interface';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {QuestionsService} from '../../services/questions.service';
 
 @Component({
@@ -13,7 +13,8 @@ export class QuestionListComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private questionService: QuestionsService
+    private questionService: QuestionsService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -22,6 +23,9 @@ export class QuestionListComponent implements OnInit {
 
   deleteCategoryHandler() {
     const categoryId = this.activatedRoute.snapshot.params['category_id'];
-    this.questionService.deleteQuestionsByCategory(categoryId);
+    this.questionService.deleteQuestionsByCategory(categoryId).subscribe(() => {
+      console.log('bip');
+      this.router.navigate(['../../'], {relativeTo: this.activatedRoute});
+    });
   }
 }
