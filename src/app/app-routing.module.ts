@@ -13,7 +13,7 @@ const routes: Routes = [{
   path: '',
   component: CategoryPageComponent,
 }, {
-  path: 'category/:id',
+  path: 'category/:category_id',
   component: QuestionListComponent,
   resolve: {
     questions: QuestionListResolver

@@ -24,7 +24,6 @@ export class QuestionListResolver implements Resolve<Question[]> {
       take(1),
       mergeMap(questions => {
         if (questions) {
-          console.log(questions);
           return of(questions);
         } else { // question not found
           this.router.navigate(['/']);

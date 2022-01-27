@@ -4,6 +4,9 @@ import {NewQuestion, Question} from '../interfaces/question.interface';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
 import {convertDocSnap, convertSnaps} from '../utils/db-utils';
 import {Category, NewCategory} from '../interfaces/category.interface';
+import firebase from 'firebase/compat';
+import DocumentChangeType = firebase.firestore.DocumentChangeType;
+import {DocumentChangeAction} from '@angular/fire/compat/firestore/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -64,6 +67,21 @@ export class QuestionsService {
 
   deleteQuestion(id: string): Observable<void> {
     return from(this.db.collection('questions').doc(id).delete());
+  }
+
+  deleteQuestionsByCategory(categoryId: string): void {
+    this.db.collection<Question>(
+      'questions',
+        ref => ref.where('categoryId', '==', categoryId)
+    ).snapshotChanges().subscribe((data) => {
+      const batch = this.db.firestore.batch();
+
+      data.map(o => {
+        batch.delete(o.payload.doc.ref);
+      });
+
+      batch.commit();
+    });
   }
 
   getCategories(): Observable<Category[]> {
