@@ -31,7 +31,6 @@ export class CategoryPageComponent implements OnInit {
       .afterClosed()
       .subscribe(name => {
       if (name) {
-        console.log(name);
         this.questionService.createCategory({name}).subscribe(() => {
           this.fetchCategories();
         });

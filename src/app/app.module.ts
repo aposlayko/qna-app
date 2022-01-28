@@ -26,6 +26,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { CategoryPageComponent } from './components/category-page/category-page.component';
 import { AddCategoryDialogComponent } from './components/add-category-dialog/add-category-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { EditCategoryDialogComponent } from './components/edit-category-dialog/edit-category-dialog.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     QuestionNewPageComponent,
     NotFoundPageComponent,
     CategoryPageComponent,
-    AddCategoryDialogComponent
+    AddCategoryDialogComponent,
+    EditCategoryDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
 <mat-nav-list>
   <a mat-list-item [routerLink]="'../../'">Back</a>
   <a mat-list-item [routerLink]="'./new-question/'">Create question</a>
+  <a mat-list-item (click)="editCategoryHandler()">Edit category</a>
   <a mat-list-item (click)="deleteCategoryHandler()">Delete category</a>
 </mat-nav-list>
 

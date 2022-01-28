@@ -91,6 +91,10 @@ export class QuestionsService {
   }
 
   createCategory(category: NewCategory): Observable<any> {
-    return from(this.db.collection('category').add(category));
+    return from(this.db.collection<NewCategory>('category').add(category));
+  }
+
+  editCategory(id: string, name: string): Observable<any> {
+    return from(this.db.collection<Category>('category').doc(id).update({name}));
   }
 }
