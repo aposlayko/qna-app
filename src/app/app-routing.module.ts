@@ -8,6 +8,7 @@ import {QuestionNewPageComponent} from './components/question-new-page/question-
 import {NotFoundPageComponent} from './components/not-found-page/not-found-page.component';
 import {CategoryPageComponent} from './components/category-page/category-page.component';
 import {QuestionListResolver} from './resolvers/question-list/question-list.resolver';
+import {CategoryResolver} from './resolvers/category/category.resolver';
 
 const routes: Routes = [{
   path: '',
@@ -16,7 +17,8 @@ const routes: Routes = [{
   path: 'category/:category_id',
   component: QuestionListComponent,
   resolve: {
-    questions: QuestionListResolver
+    questions: QuestionListResolver,
+    category: CategoryResolver
   }
 }, {
   path: 'category/:category_id/question/:id',

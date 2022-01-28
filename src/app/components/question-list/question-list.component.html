@@ -5,7 +5,7 @@
   <a mat-list-item (click)="deleteCategoryHandler()">Delete category</a>
 </mat-nav-list>
 
-<h1>Question list</h1>
+<h1>{{category.name}} question list</h1>
 
 <mat-list role="list">
   <mat-list-item role="listitem" *ngFor="let question of questions">

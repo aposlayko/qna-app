@@ -90,6 +90,14 @@ export class QuestionsService {
       );
   }
 
+  getCategoryById(id: string): Observable<Category> {
+    return this.db.doc<Category>(`category/${id}`).snapshotChanges()
+      .pipe(
+        map(convertDocSnap),
+        first()
+      );
+  }
+
   createCategory(category: NewCategory): Observable<any> {
     return from(this.db.collection<NewCategory>('category').add(category));
   }

@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {QuestionsService} from '../../services/questions.service';
 import {MatDialog} from '@angular/material/dialog';
 import {EditCategoryDialogComponent} from '../edit-category-dialog/edit-category-dialog.component';
+import {Category} from '../../interfaces/category.interface';
 
 @Component({
   selector: 'app-question-list',
@@ -12,6 +13,7 @@ import {EditCategoryDialogComponent} from '../edit-category-dialog/edit-category
 })
 export class QuestionListComponent implements OnInit {
   public questions: Question[];
+  public category: Category;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -22,6 +24,13 @@ export class QuestionListComponent implements OnInit {
 
   ngOnInit(): void {
     this.questions = this.activatedRoute.snapshot.data['questions'];
+    this.category = this.activatedRoute.snapshot.data['category'];
+  }
+
+  getCurrentCategory() {
+    this.questionService.getCategoryById(
+      this.activatedRoute.snapshot.params['category_id']
+    ).subscribe(category => this.category = category);
   }
 
   editCategoryHandler() {
@@ -32,7 +41,7 @@ export class QuestionListComponent implements OnInit {
           this.questionService.editCategory(
             this.activatedRoute.snapshot.params['category_id'],
             name
-          ).subscribe();
+          ).subscribe(this.getCurrentCategory.bind(this));
         }
       });
   }
