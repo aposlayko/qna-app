@@ -24,7 +24,6 @@ export class QuestionListComponent implements OnInit {
   deleteCategoryHandler() {
     const categoryId = this.activatedRoute.snapshot.params['category_id'];
     this.questionService.deleteQuestionsByCategory(categoryId).subscribe(() => {
-      console.log('bip');
       this.router.navigate(['../../'], {relativeTo: this.activatedRoute});
     });
   }

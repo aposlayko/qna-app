@@ -70,21 +70,16 @@ export class QuestionsService {
   }
 
   deleteQuestionsByCategory(categoryId: string): Observable<void> {
-    return from(this.db.collection<Question>(
-      'questions',
-        ref => ref.where('categoryId', '==', categoryId)
-    ).snapshotChanges().pipe(
-      switchMap(data => {
-        const batch = this.db.firestore.batch();
+    return from(this.db.firestore.runTransaction(async transaction => {
+      const categoryRef = this.db.collection('category').doc(categoryId).ref;
+      const querySnapshot = await this.db.firestore.collection('questions')
+        .where('categoryId', '==', categoryId).get();
 
-        data.map(o => {
-          batch.delete(o.payload.doc.ref);
-        });
-
-        return from(batch.commit());
-      }),
-      switchMap(() => this.deleteCategory(categoryId))
-    ));
+      querySnapshot.docs.map(doc =>{
+        transaction.delete(doc.ref);
+      });
+      transaction.delete(categoryRef);
+    }));
   }
 
   getCategories(): Observable<Category[]> {
@@ -97,9 +92,5 @@ export class QuestionsService {
 
   createCategory(category: NewCategory): Observable<any> {
     return from(this.db.collection('category').add(category));
-  }
-
-  deleteCategory(id: string): Observable<void> {
-    return from(this.db.collection('category').doc(id).delete());
   }
 }
