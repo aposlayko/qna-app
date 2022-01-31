@@ -1,16 +1,10 @@
 <mat-nav-list>
-  <mat-list-item role="listitem">
-    <a (click)="createCategoryHandler()">Create category</a>
-  </mat-list-item>
+  <a mat-list-item [routerLink]="'../../'">Back</a>
+  <a mat-list-item [routerLink]="'./new-question/'">Create question</a>
+  <a mat-list-item (click)="editCategoryHandler()">Edit category</a>
+  <a mat-list-item (click)="deleteCategoryHandler()">Delete category</a>
 </mat-nav-list>
 
-<h1>Category list</h1>
+<h1>{{category.name}} question list</h1>
 
-<mat-list role="list">
-  <mat-list-item role="listitem" *ngFor="let category of (categories$ | async)">
-    <a
-      [routerLink]="'/category/' + category.id">
-      {{ category.name }}
-    </a>
-  </mat-list-item>
-</mat-list>
+<app-question-list [questions]="questions"></app-question-list>

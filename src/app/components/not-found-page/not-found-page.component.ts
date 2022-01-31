@@ -11,7 +11,7 @@ export class NotFoundPageComponent implements OnInit {
   constructor(private questionService: QuestionsService) { }
 
   ngOnInit(): void {
-    this.questionService.getQuestionsByTagNames(['angular', 'pro']).subscribe(data => console.log(data));
+    this.questionService.getQuestionsByTagNames(['Test', 'a']).subscribe(data => console.log(data));
   }
 
 }

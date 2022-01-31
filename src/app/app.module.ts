@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {QuestionListComponent} from './components/question-list/question-list.component';
+import {CategoryPageComponent} from './components/category-page/category-page.component';
 import {QuestionPageComponent} from './components/question-page/question-page.component';
 import { MarkupContainerComponent } from './components/markup-container/markup-container.component';
 import {MatListModule} from '@angular/material/list';
@@ -23,24 +23,30 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
 import {ReactiveFormsModule} from '@angular/forms';
-import { CategoryPageComponent } from './components/category-page/category-page.component';
+import { CategoryListPageComponent } from './components/category-list-page/category-list-page.component';
 import { AddCategoryDialogComponent } from './components/add-category-dialog/add-category-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { EditCategoryDialogComponent } from './components/edit-category-dialog/edit-category-dialog.component';
+import { SearchByTagsPageComponent } from './components/search-by-tags-page/search-by-tags-page.component';
+import { SearchByTextPageComponent } from './components/search-by-text-page/search-by-text-page.component';
+import { QuestionListComponent } from './components/question-list/question-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    QuestionListComponent,
+    CategoryPageComponent,
     QuestionPageComponent,
     MarkupContainerComponent,
     QuestionEditPageComponent,
     QuestionEditorComponent,
     QuestionNewPageComponent,
     NotFoundPageComponent,
-    CategoryPageComponent,
+    CategoryListPageComponent,
     AddCategoryDialogComponent,
-    EditCategoryDialogComponent
+    EditCategoryDialogComponent,
+    SearchByTagsPageComponent,
+    SearchByTextPageComponent,
+    QuestionListComponent
   ],
   imports: [
     BrowserModule,

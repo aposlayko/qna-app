@@ -1,0 +1,41 @@
+<mat-nav-list>
+  <mat-list-item role="listitem">
+    <a routerLink="/">Back</a>
+  </mat-list-item>
+</mat-nav-list>
+
+<h1>Search by tags</h1>
+
+<mat-form-field appearance="fill">
+  <mat-label>Selected tags</mat-label>
+  <mat-chip-list
+    #chipList
+    multiple
+    aria-label="Tags selection"
+  >
+    <mat-chip
+      *ngFor="let tag of tags"
+      [value]="tag"
+      (removed)="removeTag(tag)">
+      {{tag}}
+
+      <button matChipRemove>
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip>
+    <input placeholder="New tag..."
+           [matChipInputFor]="chipList"
+           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+           [matChipInputAddOnBlur]="addOnBlur"
+           (matChipInputTokenEnd)="addTag($event)">
+  </mat-chip-list>
+</mat-form-field>
+
+<button
+  mat-raised-button
+  color="primary"
+  [disabled]="!tags.size"
+  (click)="handleSearch()"
+>Search</button>
+
+<app-question-list [questions]="questions$ | async"></app-question-list>

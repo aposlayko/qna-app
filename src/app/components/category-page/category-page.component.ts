@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
-import {AddCategoryDialogComponent} from '../add-category-dialog/add-category-dialog.component';
+import {Question} from '../../interfaces/question.interface';
+import {ActivatedRoute, Router} from '@angular/router';
 import {QuestionsService} from '../../services/questions.service';
+import {MatDialog} from '@angular/material/dialog';
+import {EditCategoryDialogComponent} from '../edit-category-dialog/edit-category-dialog.component';
 import {Category} from '../../interfaces/category.interface';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-category-page',
@@ -11,30 +12,44 @@ import {Observable} from 'rxjs';
   styleUrls: ['./category-page.component.scss']
 })
 export class CategoryPageComponent implements OnInit {
-  categories$: Observable<Category[]>
+  public questions: Question[];
+  public category: Category;
 
   constructor(
+    private activatedRoute: ActivatedRoute,
+    private questionService: QuestionsService,
     private dialog: MatDialog,
-    private questionService: QuestionsService
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.fetchCategories();
+    this.questions = this.activatedRoute.snapshot.data['questions'];
+    this.category = this.activatedRoute.snapshot.data['category'];
   }
 
-  fetchCategories(): void {
-    this.categories$ = this.questionService.getCategories();
+  getCurrentCategory() {
+    this.questionService.getCategoryById(
+      this.activatedRoute.snapshot.params['category_id']
+    ).subscribe(category => this.category = category);
   }
 
-  createCategoryHandler() {
-    this.dialog.open(AddCategoryDialogComponent)
+  editCategoryHandler() {
+    this.dialog.open(EditCategoryDialogComponent)
       .afterClosed()
       .subscribe(name => {
-      if (name) {
-        this.questionService.createCategory({name}).subscribe(() => {
-          this.fetchCategories();
-        });
-      }
+        if (name) {
+          this.questionService.editCategory(
+            this.activatedRoute.snapshot.params['category_id'],
+            name
+          ).subscribe(this.getCurrentCategory.bind(this));
+        }
+      });
+  }
+
+  deleteCategoryHandler() {
+    const categoryId = this.activatedRoute.snapshot.params['category_id'];
+    this.questionService.deleteQuestionsByCategory(categoryId).subscribe(() => {
+      this.router.navigate(['../../'], {relativeTo: this.activatedRoute});
     });
   }
 }
