@@ -57,6 +57,20 @@ export class QuestionsService {
       );
   }
 
+  searchQuestionsByTitle(text: string): Observable<Question[]> {
+    return this.db.collection<Question>(
+      'questions',
+      ref => {
+        return ref.where(`title`, '>=', text)
+          .where(`title`, '<=', text + '\uf8ff');
+      }
+    ).snapshotChanges()
+      .pipe(
+        map(convertSnaps),
+        first()
+      );
+  }
+
   createQuestion(question: NewQuestion): Observable<any> {
     return from(this.db.collection('questions').add(question));
   }

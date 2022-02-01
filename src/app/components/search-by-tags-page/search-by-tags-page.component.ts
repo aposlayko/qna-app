@@ -12,7 +12,7 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./search-by-tags-page.component.scss']
 })
 export class SearchByTagsPageComponent implements OnInit {
-  questions$: Observable<Question[]>
+  questions$: Observable<Question[]>;
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   tags = new Set([]);

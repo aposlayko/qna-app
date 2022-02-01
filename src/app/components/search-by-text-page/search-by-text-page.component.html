@@ -3,3 +3,17 @@
     <a routerLink="/">Back</a>
   </mat-list-item>
 </mat-nav-list>
+
+<mat-form-field  appearance="fill">
+  <mat-label>Title</mat-label>
+  <input #searchField matInput>
+</mat-form-field>
+
+<button
+  mat-raised-button
+  color="primary"
+  [disabled]="!searchField.value"
+  (click)="handleSearch(searchField.value)"
+>Search</button>
+
+<app-question-list [questions]="questions$ | async"></app-question-list>
