@@ -28,4 +28,8 @@ export class QuestionPageComponent implements OnInit {
       this.router.navigate(['../../'], {relativeTo: this.activatedRoute});
     })
   }
+
+  handleTagClick(tag: string): void {
+    this.router.navigate([`search-by-tags`], {queryParams: {tags: tag}});
+  }
 }

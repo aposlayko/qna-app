@@ -9,6 +9,7 @@
     *ngFor="let tag of tags"
     selected
     color="primary"
+    (click)="handleTagClick(tag)"
   >{{tag}}</mat-chip>
 </mat-chip-list>
 <app-markup-container [rawText]="question.answer"></app-markup-container>

@@ -34,7 +34,10 @@ export class CategoryPageComponent implements OnInit {
   }
 
   editCategoryHandler() {
-    this.dialog.open(EditCategoryDialogComponent)
+    this.dialog.open(
+      EditCategoryDialogComponent,
+      {data: this.category.name}
+    )
       .afterClosed()
       .subscribe(name => {
         if (name) {

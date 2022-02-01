@@ -4,6 +4,7 @@ import {MatChipInputEvent} from '@angular/material/chips';
 import {Observable} from 'rxjs';
 import {Question} from '../../interfaces/question.interface';
 import {QuestionsService} from '../../services/questions.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-search-by-tags-page',
@@ -17,10 +18,16 @@ export class SearchByTagsPageComponent implements OnInit {
   tags = new Set([]);
 
   constructor(
-    private questionsService: QuestionsService
+    private questionsService: QuestionsService,
+    private activeRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    const queryParamTags = this.activeRoute.snapshot.queryParams['tags'];
+    if (queryParamTags) {
+      queryParamTags.split(',').forEach((tag: string) => this.tags.add(tag));
+      this.handleSearch();
+    }
   }
 
   addTag(event: MatChipInputEvent): void {
