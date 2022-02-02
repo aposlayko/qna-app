@@ -11,6 +11,7 @@ import {QuestionListResolver} from './resolvers/question-list/question-list.reso
 import {CategoryResolver} from './resolvers/category/category.resolver';
 import {SearchByTagsPageComponent} from './components/search-by-tags-page/search-by-tags-page.component';
 import {SearchByTextPageComponent} from './components/search-by-text-page/search-by-text-page.component';
+import {LoginPageComponent} from './components/login-page/login-page.component';
 
 const routes: Routes = [{
   path: '',
@@ -43,6 +44,9 @@ const routes: Routes = [{
 }, {
   path: 'search-by-text',
   component: SearchByTextPageComponent
+}, {
+  path: 'login',
+  component: LoginPageComponent
 }, {
   path: '404',
   component: NotFoundPageComponent

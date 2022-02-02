@@ -4,9 +4,6 @@ import {NewQuestion, Question} from '../interfaces/question.interface';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
 import {convertDocSnap, convertSnaps} from '../utils/db-utils';
 import {Category, NewCategory} from '../interfaces/category.interface';
-import firebase from 'firebase/compat';
-import DocumentChangeType = firebase.firestore.DocumentChangeType;
-import {DocumentChangeAction} from '@angular/fire/compat/firestore/interfaces';
 
 @Injectable({
   providedIn: 'root'

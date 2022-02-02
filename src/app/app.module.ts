@@ -30,6 +30,9 @@ import { EditCategoryDialogComponent } from './components/edit-category-dialog/e
 import { SearchByTagsPageComponent } from './components/search-by-tags-page/search-by-tags-page.component';
 import { SearchByTextPageComponent } from './components/search-by-text-page/search-by-text-page.component';
 import { QuestionListComponent } from './components/question-list/question-list.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { LoginPageComponent } from './components/login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,8 @@ import { QuestionListComponent } from './components/question-list/question-list.
     EditCategoryDialogComponent,
     SearchByTagsPageComponent,
     SearchByTextPageComponent,
-    QuestionListComponent
+    QuestionListComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +64,8 @@ import { QuestionListComponent } from './components/question-list/question-list.
     MatChipsModule,
     MatIconModule,
     MatDialogModule,
+    MatToolbarModule,
+    MatSidenavModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
