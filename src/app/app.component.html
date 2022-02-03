@@ -1,8 +1,8 @@
 <mat-drawer-container class="example-container" [hasBackdrop]="true" autosize>
   <mat-drawer #drawer mode="over">
     <mat-nav-list>
-      <mat-list-item role="listitem">
-        <a routerLink="/">Log Out</a>
+      <mat-list-item *ngIf="isLoggedIn$ | async" role="listitem">
+        <a (click)="handleLogOut(); drawer.toggle();">Log Out</a>
       </mat-list-item>
     </mat-nav-list>
   </mat-drawer>
@@ -19,6 +19,7 @@
       </button>
       <span>My App</span>
       <span class="example-spacer"></span>
+      <img *ngIf="isLoggedIn$ | async" [src]="pictureUrl$ | async" class="user-profile-photo" alt="picture url">
     </mat-toolbar>
 
     <router-outlet></router-outlet>

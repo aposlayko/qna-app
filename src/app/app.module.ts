@@ -33,6 +33,20 @@ import { QuestionListComponent } from './components/question-list/question-list.
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { LoginPageComponent } from './components/login-page/login-page.component';
+import {firebase, firebaseui, FirebaseUIModule} from 'firebaseui-angular';
+import {AngularFireAuthModule} from '@angular/fire/compat/auth';
+
+const firebaseUiAuthConfig: firebaseui.auth.Config = {
+  signInFlow: 'popup',
+  signInOptions: [
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    {
+      requireDisplayName: false,
+      provider: firebase.auth.EmailAuthProvider.PROVIDER_ID
+    }
+  ],
+  credentialHelper: firebaseui.auth.CredentialHelper.GOOGLE_YOLO
+};
 
 @NgModule({
   declarations: [
@@ -68,7 +82,9 @@ import { LoginPageComponent } from './components/login-page/login-page.component
     MatSidenavModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    FirebaseUIModule.forRoot(firebaseUiAuthConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]
