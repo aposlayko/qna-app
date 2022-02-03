@@ -35,6 +35,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import {firebase, firebaseui, FirebaseUIModule} from 'firebaseui-angular';
 import {AngularFireAuthModule} from '@angular/fire/compat/auth';
+import {MatCardModule} from '@angular/material/card';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
@@ -80,6 +81,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     MatDialogModule,
     MatToolbarModule,
     MatSidenavModule,
+    MatCardModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,

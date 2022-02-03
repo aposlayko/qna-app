@@ -4,6 +4,7 @@ import {AddCategoryDialogComponent} from '../add-category-dialog/add-category-di
 import {QuestionsService} from '../../services/questions.service';
 import {Category} from '../../interfaces/category.interface';
 import {Observable} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-category-list-page',
@@ -15,7 +16,8 @@ export class CategoryListPageComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private questionService: QuestionsService
+    private questionService: QuestionsService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -29,12 +31,16 @@ export class CategoryListPageComponent implements OnInit {
   createCategoryHandler() {
     this.dialog.open(AddCategoryDialogComponent)
       .afterClosed()
-      .subscribe(name => {
-      if (name) {
-        this.questionService.createCategory({name}).subscribe(() => {
+      .subscribe(category => {
+      if (category) {
+        this.questionService.createCategory(category).subscribe(() => {
           this.fetchCategories();
         });
       }
     });
+  }
+
+  navigateToCategoryPage(categoryId: string) {
+    this.router.navigate([`category/${categoryId}`]);
   }
 }

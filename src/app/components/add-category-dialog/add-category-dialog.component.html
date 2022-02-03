@@ -1,16 +1,25 @@
 <h2 mat-dialog-title>Create new category</h2>
+
 <mat-dialog-content>
   <mat-form-field>
     <mat-label>Category name</mat-label>
-    <input #input matInput placeholder="category name">
+    <input #name matInput placeholder="category name">
   </mat-form-field>
 </mat-dialog-content>
+
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Category image url</mat-label>
+    <input #imgUrl matInput placeholder="category image url">
+  </mat-form-field>
+</mat-dialog-content>
+
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
   <button
     mat-raised-button
     color="primary"
-    [disabled]="!input.value"
-    [mat-dialog-close]="input.value"
+    [disabled]="!(name.value && imgUrl.value)"
+    [mat-dialog-close]="{name: name.value, imgUrl: imgUrl.value}"
   >Create</button>
 </mat-dialog-actions>
