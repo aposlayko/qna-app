@@ -12,38 +12,46 @@ import {CategoryResolver} from './resolvers/category/category.resolver';
 import {SearchByTagsPageComponent} from './components/search-by-tags-page/search-by-tags-page.component';
 import {SearchByTextPageComponent} from './components/search-by-text-page/search-by-text-page.component';
 import {LoginPageComponent} from './components/login-page/login-page.component';
+import {LogInGuard} from './guards/log-in.guard';
 
 const routes: Routes = [{
   path: '',
   component: CategoryListPageComponent,
+  canActivate: [LogInGuard]
 }, {
   path: 'category/:category_id',
   component: CategoryPageComponent,
   resolve: {
     questions: QuestionListResolver,
     category: CategoryResolver
-  }
+  },
+  canActivate: [LogInGuard]
 }, {
   path: 'category/:category_id/question/:id',
   component: QuestionPageComponent,
   resolve: {
     question: QuestionPageResolver
   },
+  canActivate: [LogInGuard]
 }, {
   path: 'category/:category_id/question/:id/edit',
   component: QuestionEditPageComponent,
   resolve: {
     question: QuestionPageResolver
-  }
+  },
+  canActivate: [LogInGuard]
 }, {
   path: 'category/:category_id/new-question',
-  component: QuestionNewPageComponent
+  component: QuestionNewPageComponent,
+  canActivate: [LogInGuard]
 }, {
   path: 'search-by-tags',
-  component: SearchByTagsPageComponent
+  component: SearchByTagsPageComponent,
+  canActivate: [LogInGuard]
 }, {
   path: 'search-by-text',
-  component: SearchByTextPageComponent
+  component: SearchByTextPageComponent,
+  canActivate: [LogInGuard]
 }, {
   path: 'login',
   component: LoginPageComponent

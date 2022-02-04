@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
-import {first, from, map, Observable, switchMap} from 'rxjs';
+import {first, from, map, Observable} from 'rxjs';
 import {NewQuestion, Question} from '../interfaces/question.interface';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
 import {convertDocSnap, convertSnaps} from '../utils/db-utils';
 import {Category, NewCategory} from '../interfaces/category.interface';
+import {AuthService} from './auth.service';
+import {CollectionReference, Query} from '@angular/fire/compat/firestore/interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuestionsService {
 
-  constructor(private db: AngularFirestore) {}
+  constructor(
+    private db: AngularFirestore,
+    private auth: AuthService,
+  ) {}
 
   getQuestions(): Observable<Question[]> {
     return this.db.collection<Question>('questions').snapshotChanges()
@@ -94,7 +99,10 @@ export class QuestionsService {
   }
 
   getCategories(): Observable<Category[]> {
-    return this.db.collection<Category>('category').snapshotChanges()
+    return this.db.collection<Category>(
+      'category',
+      ref => this.belongsUser(ref)
+    ).snapshotChanges()
       .pipe(
         map(convertSnaps),
         first()
@@ -115,5 +123,9 @@ export class QuestionsService {
 
   editCategory(id: string, name: string): Observable<any> {
     return from(this.db.collection<Category>('category').doc(id).update({name}));
+  }
+
+  private belongsUser<T>(ref: CollectionReference<T>): Query<T> {
+    return ref.where('userId', '==', this.auth.userId);
   }
 }

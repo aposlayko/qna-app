@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {AngularFireAuth} from '@angular/fire/compat/auth';
-import firebase from 'firebase/compat';
-import {Router} from '@angular/router';
-import {map, Observable} from 'rxjs';
+import {Observable} from 'rxjs';
+import {AuthService} from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -14,26 +12,18 @@ export class AppComponent implements OnInit {
   pictureUrl$: Observable<string>;
 
   constructor(
-    private angularFireAuth: AngularFireAuth,
-    private router: Router
+    private authService: AuthService,
   ) {
   }
 
   ngOnInit() {
-    this.angularFireAuth.authState.subscribe(this.firebaseAuthChangeListener.bind(this));
-    this.isLoggedIn$ = this.angularFireAuth.authState.pipe(map(user => !!user));
-    this.pictureUrl$ = this.angularFireAuth.authState.pipe(map(user => user?.photoURL));
+    this.isLoggedIn$ = this.authService.isLoggedIn$;
+    this.pictureUrl$ = this.authService.pictureUrl$;
   }
 
   handleLogOut() {
-    this.angularFireAuth.signOut();
+    this.authService.logOut();
   }
 
-  private firebaseAuthChangeListener(response: firebase.User) {
-    if (response) {
-      this.router.navigate(['/']);
-    } else {
-      this.router.navigate(['login']);
-    }
-  }
+
 }
