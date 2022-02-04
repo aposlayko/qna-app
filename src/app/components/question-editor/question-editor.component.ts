@@ -25,7 +25,8 @@ export class QuestionEditorComponent implements OnInit {
     title: '',
     answer: '',
     categoryId: '-1',
-    tags: {}
+    tags: {},
+    userId: null
   };
 
   questionForm: FormGroup;

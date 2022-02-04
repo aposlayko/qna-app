@@ -18,7 +18,7 @@ export class QuestionsService {
   ) {}
 
   getQuestions(): Observable<Question[]> {
-    return this.db.collection<Question>('questions').snapshotChanges()
+    return this.db.collection<Question>('questions', ref => this.belongsUser(ref)).snapshotChanges()
       .pipe(
         map(convertSnaps),
         first()
@@ -50,7 +50,7 @@ export class QuestionsService {
       ref => {
         let updRef;
         tags.forEach(tag => updRef = ref.where(`tags.${tag}`, '==', true));
-        return updRef;
+        return this.belongsUser(updRef);
       }
     ).snapshotChanges()
       .pipe(
@@ -64,7 +64,8 @@ export class QuestionsService {
       'questions',
       ref => {
         return ref.where(`title`, '>=', text)
-          .where(`title`, '<=', text + '\uf8ff');
+          .where(`title`, '<=', text + '\uf8ff')
+          .where('userId', '==', this.auth.userId)
       }
     ).snapshotChanges()
       .pipe(
@@ -74,6 +75,7 @@ export class QuestionsService {
   }
 
   createQuestion(question: NewQuestion): Observable<any> {
+    question.userId = this.auth.userId;
     return from(this.db.collection('questions').add(question));
   }
 
@@ -118,6 +120,7 @@ export class QuestionsService {
   }
 
   createCategory(category: NewCategory): Observable<any> {
+    category.userId = this.auth.userId;
     return from(this.db.collection<NewCategory>('category').add(category));
   }
 

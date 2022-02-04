@@ -5,7 +5,8 @@ export interface Question {
   categoryId: string;
   tags: {
     [key: string]: boolean
-  }
+  },
+  userId: string;
 }
 
 export type NewQuestion = Omit<Question, 'id'>
