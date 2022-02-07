@@ -18,9 +18,9 @@ export class CategoryResolver implements Resolve<Category> {
   ) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Category> {
-    const questionId = route.paramMap.get('category_id') || '';
+    const categoryId = route.paramMap.get('category_id') || '';
 
-    return this.questionsService.getCategoryById(questionId).pipe(
+    return this.questionsService.getCategoryById(categoryId).pipe(
       take(1),
       mergeMap(category => {
         if (category) {
