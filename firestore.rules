@@ -5,8 +5,12 @@ service cloud.firestore {
       return request.auth.uid != null;
     }
 
-    function belongsToUser() {
+    function belongsToUserGet() {
       return resource.data.userId == request.auth.uid;
+    }
+
+    function belongsToUserUpdate() {
+      return request.resource.data.userId == request.auth.uid;
     }
 
     function isNonEmptyString(fieldName) {
@@ -29,13 +33,18 @@ service cloud.firestore {
     }
 
     match /category/{catId} {
-      allow read: if isAuthenticated() && belongsToUser();
-      allow write: if isAuthenticated() && isValidCategory();
+      allow read: if isAuthenticated() && belongsToUserGet();
+      allow create, update: if isAuthenticated() && isValidCategory();
+      allow delete: if isAuthenticated() && belongsToUserGet();
     }
 
     match /questions/{qId} {
-      allow read: if isAuthenticated() && belongsToUser();
-      allow write: if isAuthenticated() && isValidQuestion();
+      allow get: if isAuthenticated() && belongsToUserGet();
+      allow create: if isAuthenticated() && isValidQuestion() && belongsToUserUpdate();
+      allow update:  if isAuthenticated() && isValidQuestion() && belongsToUserUpdate();
+      allow delete: if isAuthenticated() && belongsToUserGet();
+      // TODO: belongsToUserGet is not working
+      allow list: if isAuthenticated();
     }
   }
 }
