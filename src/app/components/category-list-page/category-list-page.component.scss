@@ -20,6 +20,14 @@
   margin: 10px;
   width: 300px;
   cursor: pointer;
+  padding-bottom: 30px;
+
+  mat-card-actions {
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+    padding-bottom: 8px;
+  }
 }
 
 h1 {
