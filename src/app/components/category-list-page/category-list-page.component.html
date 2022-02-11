@@ -1,31 +1,29 @@
-<mat-nav-list>
-  <mat-list-item role="listitem">
-    <a routerLink="search-by-text">Search by text</a>
-  </mat-list-item>
-  <mat-list-item role="listitem">
-    <a routerLink="search-by-tags">Search by tags</a>
-  </mat-list-item>
-  <mat-list-item role="listitem">
-    <a (click)="createCategoryHandler()">Create category</a>
-  </mat-list-item>
-</mat-nav-list>
+<div class="container">
+  <div class="actions">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="createCategoryHandler()"
+    >Create category</button>
+  </div>
 
-<h1>Category list</h1>
+  <h1>Categories list</h1>
 
-<div class="cards-container">
-  <mat-card
-    class="category-card"
-    *ngFor="let category of (categories$ | async)"
-    (click)="navigateToCategoryPage(category.id)"
-  >
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>{{category.name}}</mat-card-title>
-    </mat-card-header>
-    <img mat-card-image [src]="category.imgUrl">
-    <mat-card-actions>
-      <button mat-button (click)="$event.stopPropagation()">Edit</button>
-      <button mat-button (click)="$event.stopPropagation()">Delete</button>
-    </mat-card-actions>
-  </mat-card>
+  <div class="cards-container">
+    <mat-card
+      class="category-card"
+      *ngFor="let category of (categories$ | async)"
+      (click)="navigateToCategoryPage(category.id)"
+    >
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{category.name}}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image [src]="category.imgUrl">
+      <mat-card-actions>
+        <button mat-button (click)="$event.stopPropagation()">Edit</button>
+        <button mat-button (click)="handleDeleteCategoryClick(category); $event.stopPropagation();">Delete</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {AddCategoryDialogComponent} from '../add-category-dialog/add-category-dialog.component';
+import {AddCategoryDialogComponent} from '../dialogs/add-category-dialog/add-category-dialog.component';
 import {QuestionsService} from '../../services/questions.service';
 import {Category} from '../../interfaces/category.interface';
 import {Observable} from 'rxjs';
@@ -42,5 +42,12 @@ export class CategoryListPageComponent implements OnInit {
 
   navigateToCategoryPage(categoryId: string) {
     this.router.navigate([`category/${categoryId}`]);
+  }
+
+  handleDeleteCategoryClick(category: Category) {
+
+    this.questionService.deleteQuestionsByCategory(category.id).subscribe(result => {
+      this.fetchCategories();
+    })
   }
 }

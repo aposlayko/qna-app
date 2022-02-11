@@ -1,3 +1,13 @@
+.container {
+  padding: 10px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 30px;
+}
+
 .cards-container {
   display: flex;
   flex-direction: row;
@@ -7,6 +17,11 @@
 }
 
 .category-card {
+  margin: 10px;
   width: 300px;
   cursor: pointer;
+}
+
+h1 {
+  text-align: center;
 }

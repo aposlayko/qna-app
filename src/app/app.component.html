@@ -2,6 +2,12 @@
   <mat-drawer #drawer mode="over">
     <mat-nav-list>
       <mat-list-item *ngIf="isLoggedIn$ | async" role="listitem">
+        <a routerLink="search-by-text" (click)="drawer.toggle();">Search by text</a>
+      </mat-list-item>
+      <mat-list-item *ngIf="isLoggedIn$ | async" role="listitem">
+        <a routerLink="search-by-tags" (click)="drawer.toggle();">Search by tags</a>
+      </mat-list-item>
+      <mat-list-item *ngIf="isLoggedIn$ | async" role="listitem">
         <a (click)="handleLogOut(); drawer.toggle();">Log Out</a>
       </mat-list-item>
     </mat-nav-list>

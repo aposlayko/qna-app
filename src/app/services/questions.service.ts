@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import {first, from, map, Observable} from 'rxjs';
+import {EMPTY, first, from, map, mergeMap, Observable} from 'rxjs';
 import {NewQuestion, Question} from '../interfaces/question.interface';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
 import {convertDocSnap, convertSnaps} from '../utils/db-utils';
 import {Category, NewCategory} from '../interfaces/category.interface';
 import {AuthService} from './auth.service';
 import {CollectionReference, Query} from '@angular/fire/compat/firestore/interfaces';
+import {ConfirmDialogService} from './confirm-dialog.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class QuestionsService {
   constructor(
     private db: AngularFirestore,
     private auth: AuthService,
+    private confirmDialogService: ConfirmDialogService,
   ) {}
 
   getQuestions(): Observable<Question[]> {
@@ -88,7 +90,21 @@ export class QuestionsService {
   }
 
   deleteQuestionsByCategory(categoryId: string): Observable<void> {
-    return from(this.db.firestore.runTransaction(async transaction => {
+    return this.confirmDialogService.openDeleteCategoryConfirmDialog().pipe(
+      mergeMap(isDelete => {
+        return isDelete ? from(this.db.firestore.runTransaction(async transaction => {
+          const categoryRef = this.db.collection('category').doc(categoryId).ref;
+          const querySnapshot = await this.db.firestore.collection('questions')
+            .where('categoryId', '==', categoryId).get();
+
+          querySnapshot.docs.map(doc =>{
+            transaction.delete(doc.ref);
+          });
+          transaction.delete(categoryRef);
+        })) : EMPTY;
+      })
+    );
+    /*return from(this.db.firestore.runTransaction(async transaction => {
       const categoryRef = this.db.collection('category').doc(categoryId).ref;
       const querySnapshot = await this.db.firestore.collection('questions')
         .where('categoryId', '==', categoryId).get();
@@ -97,7 +113,7 @@ export class QuestionsService {
         transaction.delete(doc.ref);
       });
       transaction.delete(categoryRef);
-    }));
+    }));*/
   }
 
   getCategories(): Observable<Category[]> {

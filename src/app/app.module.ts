@@ -24,7 +24,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
 import {ReactiveFormsModule} from '@angular/forms';
 import { CategoryListPageComponent } from './components/category-list-page/category-list-page.component';
-import { AddCategoryDialogComponent } from './components/add-category-dialog/add-category-dialog.component';
+import { AddCategoryDialogComponent } from './components/dialogs/add-category-dialog/add-category-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { EditCategoryDialogComponent } from './components/edit-category-dialog/edit-category-dialog.component';
 import { SearchByTagsPageComponent } from './components/search-by-tags-page/search-by-tags-page.component';
@@ -36,6 +36,7 @@ import { LoginPageComponent } from './components/login-page/login-page.component
 import {firebase, firebaseui, FirebaseUIModule} from 'firebaseui-angular';
 import {AngularFireAuthModule} from '@angular/fire/compat/auth';
 import {MatCardModule} from '@angular/material/card';
+import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/confirm-dialog.component';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
@@ -65,7 +66,8 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     SearchByTagsPageComponent,
     SearchByTextPageComponent,
     QuestionListComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
