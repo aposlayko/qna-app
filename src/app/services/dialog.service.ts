@@ -17,6 +17,16 @@ export class DialogService {
         confirmBtnTitle: 'Delete',
         cancelBtnTitle: 'Cancel',
       }
-    }).afterClosed()
+    }).afterClosed();
+  }
+
+  openDeleteQuestionConfirmDialog(): Observable<boolean> {
+    return this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        text: 'Do you really want to delete this question?',
+        confirmBtnTitle: 'Delete',
+        cancelBtnTitle: 'Cancel',
+      }
+    }).afterClosed();
   }
 }

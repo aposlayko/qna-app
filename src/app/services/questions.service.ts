@@ -86,7 +86,11 @@ export class QuestionsService {
   }
 
   deleteQuestion(id: string): Observable<void> {
-    return from(this.db.collection('questions').doc(id).delete());
+    return this.confirmDialogService.openDeleteQuestionConfirmDialog().pipe(
+      mergeMap(isDelete => {
+        return isDelete ? from(this.db.collection('questions').doc(id).delete()) : EMPTY;
+      })
+    );
   }
 
   deleteQuestionsByCategory(categoryId: string): Observable<void> {
