@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  padding: 15px;
+  flex-direction: column;
+  align-items: flex-start;
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    text-align: center;
+  }
+}

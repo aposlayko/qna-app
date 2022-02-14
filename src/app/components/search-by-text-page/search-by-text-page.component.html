@@ -1,10 +1,10 @@
-<mat-nav-list>
-  <mat-list-item role="listitem">
-    <a routerLink="/">Back</a>
-  </mat-list-item>
-</mat-nav-list>
+<div class="actions">
+  <button mat-raised-button routerLink="/">Back</button>
+</div>
 
-<mat-form-field  appearance="fill">
+<h1>Search by text</h1>
+
+<mat-form-field appearance="fill">
   <mat-label>Title</mat-label>
   <input #searchField matInput>
 </mat-form-field>
@@ -14,6 +14,7 @@
   color="primary"
   [disabled]="!searchField.value"
   (click)="handleSearch(searchField.value)"
->Search</button>
+>Search
+</button>
 
 <app-question-list [questions]="questions$ | async"></app-question-list>
