@@ -1,16 +1,12 @@
 :host {
   display: flex;
   flex-direction: column;
-  height: 100%;
   color: white;
+  padding: 15px;
 
-  .menu {
-    height: 5%;
-  }
-
-  .edit-container {
-    height: 95%;
-
-
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
   }
 }
