@@ -36,14 +36,18 @@ export class CategoryPageComponent implements OnInit {
   editCategoryHandler() {
     this.dialog.open(
       EditCategoryDialogComponent,
-      {data: this.category.name}
+      {
+        width: '400px',
+        data: this.category
+      }
     )
       .afterClosed()
-      .subscribe(name => {
-        if (name) {
+      .subscribe(category => {
+        if (category) {
           this.questionService.editCategory(
             this.activatedRoute.snapshot.params['category_id'],
-            name
+            category.name,
+            category.imgUrl
           ).subscribe(this.getCurrentCategory.bind(this));
         }
       });

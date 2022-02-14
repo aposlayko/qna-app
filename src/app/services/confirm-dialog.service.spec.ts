@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ConfirmDialogService } from './confirm-dialog.service';
+import { DialogService } from './dialog.service';
 
 describe('ConfirmDialogService', () => {
-  let service: ConfirmDialogService;
+  let service: DialogService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ConfirmDialogService);
+    service = TestBed.inject(DialogService);
   });
 
   it('should be created', () => {

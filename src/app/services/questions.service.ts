@@ -6,7 +6,7 @@ import {convertDocSnap, convertSnaps} from '../utils/db-utils';
 import {Category, NewCategory} from '../interfaces/category.interface';
 import {AuthService} from './auth.service';
 import {CollectionReference, Query} from '@angular/fire/compat/firestore/interfaces';
-import {ConfirmDialogService} from './confirm-dialog.service';
+import {DialogService} from './dialog.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class QuestionsService {
   constructor(
     private db: AngularFirestore,
     private auth: AuthService,
-    private confirmDialogService: ConfirmDialogService,
+    private confirmDialogService: DialogService,
   ) {}
 
   getQuestions(): Observable<Question[]> {
@@ -104,16 +104,6 @@ export class QuestionsService {
         })) : EMPTY;
       })
     );
-    /*return from(this.db.firestore.runTransaction(async transaction => {
-      const categoryRef = this.db.collection('category').doc(categoryId).ref;
-      const querySnapshot = await this.db.firestore.collection('questions')
-        .where('categoryId', '==', categoryId).get();
-
-      querySnapshot.docs.map(doc =>{
-        transaction.delete(doc.ref);
-      });
-      transaction.delete(categoryRef);
-    }));*/
   }
 
   getCategories(): Observable<Category[]> {
@@ -140,8 +130,10 @@ export class QuestionsService {
     return from(this.db.collection<NewCategory>('category').add(category));
   }
 
-  editCategory(id: string, name: string): Observable<any> {
-    return from(this.db.collection<Category>('category').doc(id).update({name}));
+  editCategory(id: string, name: string, imgUrl: string): Observable<any> {
+    return from(
+      this.db.collection<Category>('category').doc(id).update({name, imgUrl})
+    );
   }
 
   private belongsUser<T>(ref: CollectionReference<T>): Query<T> {

@@ -5,6 +5,7 @@ import {QuestionsService} from '../../services/questions.service';
 import {Category} from '../../interfaces/category.interface';
 import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
+import {EditCategoryDialogComponent} from '../edit-category-dialog/edit-category-dialog.component';
 
 @Component({
   selector: 'app-category-list-page',
@@ -46,8 +47,27 @@ export class CategoryListPageComponent implements OnInit {
 
   handleDeleteCategoryClick(category: Category) {
 
-    this.questionService.deleteQuestionsByCategory(category.id).subscribe(result => {
-      this.fetchCategories();
-    })
+    this.questionService.deleteQuestionsByCategory(category.id)
+      .subscribe(this.fetchCategories.bind(this));
+  }
+
+  handleEditCategoryClick(category: Category) {
+    this.dialog.open(
+      EditCategoryDialogComponent,
+      {
+        width: '400px',
+        data: category
+      }
+    )
+      .afterClosed()
+      .subscribe(result => {
+        if (result) {
+          this.questionService.editCategory(
+            category.id,
+            result.name,
+            result.imgUrl
+          ).subscribe(this.fetchCategories.bind(this));
+        }
+      });
   }
 }

@@ -1,16 +1,24 @@
 <h2 mat-dialog-title>Edit category</h2>
 <mat-dialog-content>
-  <mat-form-field>
-    <mat-label>Category name</mat-label>
-    <input #input matInput [value]="name" placeholder="category name">
-  </mat-form-field>
+  <p>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input #name matInput [value]="category.name" placeholder="category name">
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field>
+      <mat-label>Img url</mat-label>
+      <input #url matInput [value]="category.imgUrl" placeholder="category omg url">
+    </mat-form-field>
+  </p>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
   <button
     mat-raised-button
     color="primary"
-    [disabled]="!input.value"
-    [mat-dialog-close]="input.value"
+    [disabled]="!name.value || !url.value"
+    [mat-dialog-close]="{name: name.value, imgUrl: url.value}"
   >Edit</button>
 </mat-dialog-actions>
