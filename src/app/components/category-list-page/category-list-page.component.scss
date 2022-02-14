@@ -1,11 +1,12 @@
-.container {
-  padding: 10px;
+:host {
+  display: block;
+  padding: 15px;
 }
 
 .actions {
   display: flex;
   justify-content: flex-end;
-  padding: 0 30px;
+  margin-bottom: 15px;
 }
 
 .cards-container {
