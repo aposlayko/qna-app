@@ -30,6 +30,15 @@
     </mat-chip-list>
   </mat-form-field>
 
+  <mat-form-field appearance="fill">
+    <mat-label>Category</mat-label>
+    <mat-select formControlName="categoryInput">
+      <mat-option *ngFor="let category of categories$ | async" [value]="category.id">
+        {{category.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <div class="editor-container">
     <mat-form-field  appearance="fill">
       <mat-label>Textarea</mat-label>

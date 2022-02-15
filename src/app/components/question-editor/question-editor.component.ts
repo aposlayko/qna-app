@@ -3,6 +3,9 @@ import {Question} from '../../interfaces/question.interface';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {QuestionsService} from '../../services/questions.service';
+import {Observable} from 'rxjs';
+import {Category} from '../../interfaces/category.interface';
 
 @Component({
   selector: 'app-question-editor',
@@ -15,6 +18,8 @@ export class QuestionEditorComponent implements OnInit {
   @Input() question?: Question;
 
   @Output() updateQuestion = new EventEmitter<Question>();
+
+  categories$: Observable<Category[]>;
 
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
@@ -31,7 +36,7 @@ export class QuestionEditorComponent implements OnInit {
 
   questionForm: FormGroup;
 
-  constructor() { }
+  constructor(private questionService: QuestionsService) { }
 
   ngOnInit(): void {
     if (this.question) {
@@ -48,6 +53,7 @@ export class QuestionEditorComponent implements OnInit {
     });
 
     this.tags = new Set(Object.keys(this.updatedQuestion.tags));
+    this.categories$ = this.questionService.getCategories();
   }
 
   addTag(event: MatChipInputEvent): void {
@@ -79,6 +85,7 @@ export class QuestionEditorComponent implements OnInit {
       ...this.updatedQuestion,
       title: result.titleInput,
       answer: result.answerInput,
+      categoryId: result.categoryInput,
       tags: resultTags,
     }
     this.updateQuestion.emit(this.updatedQuestion);

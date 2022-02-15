@@ -37,6 +37,7 @@ import {firebase, firebaseui, FirebaseUIModule} from 'firebaseui-angular';
 import {AngularFireAuthModule} from '@angular/fire/compat/auth';
 import {MatCardModule} from '@angular/material/card';
 import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/confirm-dialog.component';
+import {MatSelectModule} from '@angular/material/select';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
@@ -84,6 +85,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     MatToolbarModule,
     MatSidenavModule,
     MatCardModule,
+    MatSelectModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
