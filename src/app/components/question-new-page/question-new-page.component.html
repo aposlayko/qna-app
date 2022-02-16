@@ -2,4 +2,7 @@
 <div class="actions">
   <button mat-raised-button [routerLink]="'../'">Back</button>
 </div>
-<app-question-editor (updateQuestion)="updateQuestionHandler($event)"></app-question-editor>
+<app-question-editor
+  [defaultCategoryId]="activatedRoute.snapshot.params['category_id']"
+  (updateQuestion)="updateQuestionHandler($event)"
+></app-question-editor>

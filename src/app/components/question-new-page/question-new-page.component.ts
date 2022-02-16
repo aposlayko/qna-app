@@ -13,7 +13,7 @@ export class QuestionNewPageComponent implements OnInit {
   constructor(
     private router: Router,
     private questionService: QuestionsService,
-    private activatedRoute: ActivatedRoute
+    public activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -21,7 +21,6 @@ export class QuestionNewPageComponent implements OnInit {
 
   updateQuestionHandler(question: Question) {
     delete question.id;
-    question.categoryId = this.activatedRoute.snapshot.params['category_id'];
     this.questionService.createQuestion(question).subscribe(() => {
       this.router.navigate([`../`], {relativeTo: this.activatedRoute});
     });

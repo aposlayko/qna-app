@@ -16,6 +16,7 @@ export class QuestionEditorComponent implements OnInit {
   @ViewChild('textArea') textAreaElement: ElementRef;
 
   @Input() question?: Question;
+  @Input() defaultCategoryId?: string;
 
   @Output() updateQuestion = new EventEmitter<Question>();
 
@@ -29,7 +30,7 @@ export class QuestionEditorComponent implements OnInit {
     id: '',
     title: '',
     answer: '',
-    categoryId: '-1',
+    categoryId: null,
     tags: {},
     userId: null
   };
@@ -43,6 +44,8 @@ export class QuestionEditorComponent implements OnInit {
       this.updatedQuestion = {
         ...this.question
       }
+    } else {
+      this.updatedQuestion.categoryId = this.defaultCategoryId || null;
     }
 
     this.questionForm = new FormGroup({
