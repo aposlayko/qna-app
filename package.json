@@ -8,7 +8,8 @@
     "build:prod": "node --max-old-space-size=4096 ./node_modules/@angular/cli/bin/ng build -c production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deploy": "node --max-old-space-size=4096 ./node_modules/@angular/cli/bin/ng build -c production && firebase deploy"
+    "deploy": "node --max-old-space-size=4096 ./node_modules/@angular/cli/bin/ng build -c production && firebase deploy",
+    "update-local-indexes-from-admin": "firebase firestore:indexes > firestore.indexes.json"
   },
   "private": true,
   "dependencies": {
