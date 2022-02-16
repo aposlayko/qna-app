@@ -1,8 +1,26 @@
-<mat-list role="list">
-  <mat-list-item role="listitem" *ngFor="let question of questions">
-    <a
-      [routerLink]="'/category/' + question.categoryId + '/question/' + question.id">
-      {{ question.title }}
-    </a>
-  </mat-list-item>
-</mat-list>
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let question of questions">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{question.title}}
+
+        <mat-chip-list>
+          <mat-chip
+            *ngFor="let tag of objectKeys(question.tags)"
+            selected
+            color="primary"
+            (click)="handleTagClick(tag)"
+          >{{tag}}</mat-chip>
+        </mat-chip-list>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <app-markup-container [rawText]="question.answer"></app-markup-container>
+
+    <mat-action-row>
+      <button mat-raised-button color="accent" (click)="handleOpenClick(question)">Open</button>
+      <button mat-raised-button color="warn" (click)="handleEditClick(question)">Edit</button>
+      <button mat-raised-button color="primary" (click)="handleDeleteClick(question)">Delete</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>

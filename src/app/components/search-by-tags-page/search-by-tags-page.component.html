@@ -37,4 +37,10 @@
 >Search
 </button>
 
-<app-question-list [questions]="questions$ | async"></app-question-list>
+<app-question-list
+  [questions]="questions$ | async"
+  (openQuestion)="handleOpenQuestion($event)"
+  (editQuestion)="handleEditQuestion($event)"
+  (deleteQuestion)="handleDeleteQuestion($event)"
+  (searchByTag)="handleSearchByTag($event)"
+></app-question-list>
