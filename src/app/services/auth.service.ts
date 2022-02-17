@@ -15,7 +15,7 @@ export class AuthService {
 
   constructor(
     private angularFireAuth: AngularFireAuth,
-    private router: Router
+    private router: Router,
   ) {
     this.user$ = this.angularFireAuth.authState;
     this.isLoggedIn$ = this.user$.pipe(map(user => !!user));
@@ -24,13 +24,17 @@ export class AuthService {
   }
 
   logOut(): void {
-    this.angularFireAuth.signOut();
+    this.angularFireAuth.signOut().then();
   }
 
   private firebaseAuthChangeListener(user: firebase.User) {
     if (user) {
       this.userId = user.uid;
-      this.router.navigate(['/']);
+
+      // if user has already logged in and press f5 void navigation
+      if (window.location.pathname.search('login') >= 0) {
+        this.router.navigate(['/']);
+      }
     } else {
       this.userId = null;
       this.router.navigate(['login']);
