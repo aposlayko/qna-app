@@ -14,3 +14,16 @@
     }
   }
 }
+
+mat-chip-list {
+  display: block;
+  margin-bottom: 20px;
+}
+
+hr {
+  border: none; /* hide border for Firefox */
+  color: #c2185b; /* Line color for rest browsers */
+  background-color: #c2185b; /* Line color for Firefox and Opera */
+  height: 2px; /* line thickness */
+  margin: 20px 0;
+}

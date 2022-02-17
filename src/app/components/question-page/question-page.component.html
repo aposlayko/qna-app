@@ -21,4 +21,11 @@
     (click)="handleTagClick(tag)"
   >{{tag}}</mat-chip>
 </mat-chip-list>
+
 <app-markup-container [rawText]="question.answer"></app-markup-container>
+
+<ng-container *ngIf="question.answerEng">
+  <hr />
+  <app-markup-container [rawText]="question.answerEng"></app-markup-container>
+</ng-container>
+

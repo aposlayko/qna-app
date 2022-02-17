@@ -30,6 +30,7 @@ export class QuestionEditorComponent implements OnInit {
     id: '',
     title: '',
     answer: '',
+    answerEng: '',
     categoryId: null,
     tags: {},
     userId: null
@@ -51,6 +52,7 @@ export class QuestionEditorComponent implements OnInit {
     this.questionForm = new FormGroup({
       titleInput: new FormControl(this.updatedQuestion.title, Validators.required),
       answerInput: new FormControl(this.updatedQuestion.answer, Validators.required),
+      answerEngInput: new FormControl(this.updatedQuestion.answerEng),
       tagsInput: new FormControl(this.tags),
       categoryInput: new FormControl(this.updatedQuestion.categoryId , Validators.required)
     });
@@ -88,6 +90,7 @@ export class QuestionEditorComponent implements OnInit {
       ...this.updatedQuestion,
       title: result.titleInput,
       answer: result.answerInput,
+      answerEng: result.answerEngInput,
       categoryId: result.categoryInput,
       tags: resultTags,
     }

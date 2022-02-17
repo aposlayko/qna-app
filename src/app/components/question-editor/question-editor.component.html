@@ -41,11 +41,21 @@
 
   <div class="editor-container">
     <mat-form-field  appearance="fill">
-      <mat-label>Textarea</mat-label>
+      <mat-label>Answer</mat-label>
       <textarea matInput formControlName="answerInput" cdkTextareaAutosize [value]="updatedQuestion.answer" #textArea></textarea>
     </mat-form-field>
     <div class="markdown">
       <app-markup-container [rawText]="(questionForm.controls['answerInput'].valueChanges | async) || updatedQuestion.answer"></app-markup-container>
+    </div>
+  </div>
+
+  <div class="editor-container">
+    <mat-form-field  appearance="fill">
+      <mat-label>Answer in english</mat-label>
+      <textarea matInput formControlName="answerEngInput" cdkTextareaAutosize [value]="updatedQuestion.answerEng"></textarea>
+    </mat-form-field>
+    <div class="markdown">
+      <app-markup-container [rawText]="(questionForm.controls['answerEngInput'].valueChanges | async) || updatedQuestion.answerEng"></app-markup-container>
     </div>
   </div>
 
